@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compile and Run Java",
+      "type": "shell",
+      "command": "sh",
+      "args": [
+        "-c",
+        "javac ${file} && java -cp ${fileDirname} ${fileBasenameNoExtension} < ${fileDirname}/inputs/input.txt > ${fileDirname}/inputs/output.txt && echo '↪ Wrote output to inputs/output.txt'"
+      ],
+      "presentation": { "reveal": "always" },
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": {
+        "owner": "java",
+        "fileLocation": ["relative", "${workspaceFolder}"],
+        "pattern": {
+          "regexp": "^(.*\\.java):(\\d+): (.*)$",
+          "file": 1,
+          "line": 2,
+          "message": 3
+        }
+      }
+    }
+  ]
+}
