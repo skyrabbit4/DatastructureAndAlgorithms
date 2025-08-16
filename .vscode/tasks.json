@@ -4,23 +4,14 @@
     {
       "label": "Compile and Run Java",
       "type": "shell",
-      "command": "sh",
+      "command": "bash",
       "args": [
-        "-c",
-        "javac ${file} && java -cp ${fileDirname} ${fileBasenameNoExtension} < ${fileDirname}/inputs/input.txt > ${fileDirname}/inputs/output.txt && echo '↪ Wrote output to inputs/output.txt'"
+        "-lc",
+        "SRC=\"${fileDirname}/${fileBasenameNoExtension}.java\"; WS=\"${workspaceFolder}\"; PKG_PATH=\"${fileDirname}\"; PKG_PATH=\"${PKG_PATH#\"$WS\"/}\"; PKG_PATH=\"${PKG_PATH#./}\"; PKG_PATH=\"${PKG_PATH//\\//.}\"; FQCN=\"${fileBasenameNoExtension}\"; if [ -n \"$PKG_PATH\" ]; then FQCN=\"$PKG_PATH.$FQCN\"; fi; javac \"$SRC\" && java -cp \"$WS\" \"$FQCN\" < \"${fileDirname}/inputs/input.txt\" > \"${fileDirname}/inputs/output.txt\" && echo '↪ Wrote output to inputs/output.txt'"
       ],
-      "presentation": { "reveal": "always" },
       "group": { "kind": "build", "isDefault": true },
-      "problemMatcher": {
-        "owner": "java",
-        "fileLocation": ["relative", "${workspaceFolder}"],
-        "pattern": {
-          "regexp": "^(.*\\.java):(\\d+): (.*)$",
-          "file": 1,
-          "line": 2,
-          "message": 3
-        }
-      }
+      "presentation": { "reveal": "always" },
+      "problemMatcher": []
     }
   ]
 }
